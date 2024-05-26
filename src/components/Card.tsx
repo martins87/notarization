@@ -10,7 +10,7 @@ const Card: FC<CardProps> = ({ children, className }) => {
   return (
     <div
       className={twMerge(
-        "flex flex-col justify-center gap-4 py-8 px-6 lg:px-10 rounded-2xl shadow-2xl",
+        "w-[80%] md:w-full flex flex-col justify-center gap-4 py-8 px-6 lg:px-10 rounded-2xl shadow-2xl",
         className
       )}
     >

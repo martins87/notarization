@@ -11,13 +11,15 @@ import TxList from "@/components/TxList";
 import Pen from "./assets/Pen.svg";
 import PaperClip from "./assets/PaperClip.svg";
 import List from "./assets/List.svg";
+import Header from "@/components/Header";
 
 export default function Home() {
   const [card, setCard] = useState(0);
 
   return (
     <Container>
-      <div className="flex gap-6">
+      <Header />
+      <div className="w-[80%] md:w-full flex gap-6 float-left">
         <Icon icon={Pen} onClick={() => setCard(0)} />
         <Icon icon={PaperClip} onClick={() => setCard(1)} />
         <Icon icon={List} onClick={() => setCard(2)} />
