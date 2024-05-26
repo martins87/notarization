@@ -1,14 +1,16 @@
 "use client";
 
+import { useState } from "react";
+
 import Container from "@/components/Container";
 import Icon from "@/components/Icon";
 import PlainText from "@/components/PlainText";
 import File from "@/components/File";
+import TxList from "@/components/TxList";
+
 import Pen from "./assets/Pen.svg";
 import PaperClip from "./assets/PaperClip.svg";
 import List from "./assets/List.svg";
-import { useState } from "react";
-import TxList from "@/components/TxList";
 
 export default function Home() {
   const [card, setCard] = useState(0);
