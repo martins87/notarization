@@ -26,7 +26,7 @@ const PlainText = () => {
     <Card>
       <span className="text-xl">Plain text</span>
       <textarea
-        className="textarea textarea-bordered min-h-44 focus:border-none"
+        className="textarea textarea-bordered min-h-36 focus:border-none"
         value={data}
         onChange={(e) => setData(e.target.value)}
         placeholder="type here..."
