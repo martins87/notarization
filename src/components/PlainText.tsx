@@ -16,8 +16,8 @@ const PlainText = () => {
   const handleRegister = async () => {
     setLoading(true);
     let hash: string = await register(sha256(data).toString());
-    setLoading(false);
     setTxHash(hash);
+    setLoading(false);
   };
 
   const handleReset = () => setData("");

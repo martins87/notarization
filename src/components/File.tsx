@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 // import { useState } from "react";
 // import sha256 from "crypto-js/sha256";

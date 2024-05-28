@@ -2,7 +2,7 @@
 const nextConfig = {
   env: {
     WALLET_KEY:
-      "2343c8cc070130b14400bd628623fac7d5e799554a8bacea6dfdced07c0dfa2f",
+      "0x0ac96a6b94ffc731d77ea98c2a476bbdd49ba31014d48fac4289ca3b2dab0819",
   },
 };
 

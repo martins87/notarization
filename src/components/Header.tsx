@@ -12,7 +12,7 @@ const Header = () => {
       <p>
         Secure your data with a click. No technical skills needed, just enter
         your data
-        <br /> and it&apos;s registered on the Ethereum blockchain in seconds
+        <br /> and it is registered on the Ethereum blockchain in seconds
       </p>
     </div>
   );
