@@ -13,14 +13,15 @@ const PlainText = () => {
   const [txHash, setTxHash] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
+  const handleReset = () => setData("");
+
+  // TODO make useRegister hook
   const handleRegister = async () => {
     setLoading(true);
     let hash: string = await register(sha256(data).toString());
     setTxHash(hash);
     setLoading(false);
   };
-
-  const handleReset = () => setData("");
 
   return (
     <Card>
@@ -31,7 +32,7 @@ const PlainText = () => {
         onChange={(e) => setData(e.target.value)}
         placeholder="type here..."
       ></textarea>
-      <SHA256Hash data={data} />
+      <SHA256Hash data={data} toHash />
       <div className="inline">
         <button className="btn btn-sm" onClick={handleReset}>
           Reset
