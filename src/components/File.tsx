@@ -3,58 +3,21 @@
 import { useState } from "react";
 import CryptoJS from "crypto-js";
 
-import Card from "./Card";
 import { register } from "@/lib/register";
+import { loadFile } from "@/lib/load-file";
+import Card from "./Card";
 import SHA256Hash from "./SHA256Hash";
 import TxLink from "./TxLink";
 
-const INITIAL_HASH =
+const EMPTY_DATA_HASH =
   "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
 
 const File = () => {
   const [calculating, setCalculating] = useState<boolean>(false);
-  const [fileHash, setFileHash] = useState<string>(INITIAL_HASH);
+  const [fileHash, setFileHash] = useState<string>(EMPTY_DATA_HASH);
   const [loaded, setLoaded] = useState<number>(0);
   const [txHash, setTxHash] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-
-  const callbackRead = (
-    reader,
-    file,
-    event,
-    callbackProgress,
-    callbackFinal
-  ) => {
-    callbackProgress(event.target.result);
-    if (reader.offset + reader.size >= file.size) {
-      callbackFinal();
-    }
-  };
-
-  const loadingFile = (file, callbackProgress, callbackFinal) => {
-    var chunkSize = 1024 * 1024; // bytes
-    var offset = 0;
-    var size = chunkSize;
-    var partial;
-    var index = 0;
-
-    if (file.size === 0) {
-      callbackFinal();
-    }
-    while (offset < file.size) {
-      partial = file.slice(offset, offset + size);
-      var reader = new FileReader();
-      reader.size = chunkSize;
-      reader.offset = offset;
-      reader.index = index;
-      reader.onload = function (evt) {
-        callbackRead(this, file, evt, callbackProgress, callbackFinal);
-      };
-      reader.readAsArrayBuffer(partial);
-      offset += chunkSize;
-      index += 1;
-    }
-  };
 
   const handleFileSelected = (e: any) => {
     setLoaded(0);
@@ -64,9 +27,9 @@ const File = () => {
     const SHA256 = CryptoJS.algo.SHA256.create();
     let counter = 0;
 
-    loadingFile(
+    loadFile(
       file,
-      (data) => {
+      (data: any) => {
         var wordBuffer = CryptoJS.lib.WordArray.create(data);
         SHA256.update(wordBuffer);
         counter += data.byteLength;
@@ -81,12 +44,10 @@ const File = () => {
   };
 
   const handleRegisterFile = async () => {
-    console.log("loading:", loading);
     setLoading(true);
     let hash: string = await register(fileHash);
     setTxHash(hash);
     setLoading(false);
-    console.log("loading:", loading);
   };
 
   return (
@@ -109,12 +70,12 @@ const File = () => {
           ></progress>
         </div>
       ) : (
-        fileHash !== INITIAL_HASH && <SHA256Hash data={fileHash} />
+        fileHash !== EMPTY_DATA_HASH && <SHA256Hash data={fileHash} />
       )}
       <button
         className="w-fit btn btn-neutral btn-sm text-white mt-4 ml-1"
         onClick={handleRegisterFile}
-        disabled={fileHash === INITIAL_HASH}
+        disabled={fileHash === EMPTY_DATA_HASH}
       >
         Register
       </button>
